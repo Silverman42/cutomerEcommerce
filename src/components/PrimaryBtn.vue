@@ -6,8 +6,7 @@
       buttonPrimaryStyling.primary,
       width,
       extraClass,
-      disabled == true ? 'cursor-not-allowed' : '',
-      loading == true ? 'cursor-wait' : '',
+      buttonStateCursor,
       fontColor,
     ]"
     :disabled="disabled == true || loading == true"
@@ -65,9 +64,14 @@ export default {
         };
       }
       return {
-        hover: `bg-${this.color}-500`,
-        primary: `hover:bg-${this.color}-700`,
+        hover: `bg-${this.color}-400`,
+        primary: `hover:bg-${this.color}-600`,
       };
+    },
+    buttonStateCursor() {
+      if (this.disabled === true) return 'cursor-not-allowed';
+      if (this.loading === true) return 'cursor-wait';
+      return '';
     },
   },
   methods: {
