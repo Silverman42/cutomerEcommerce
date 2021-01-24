@@ -20,7 +20,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .load-bar > span {
   animation: glow 1s ease-in 0.1s infinite;
   @apply p-2 block rounded-xl bg-gray-200 mr-3;
