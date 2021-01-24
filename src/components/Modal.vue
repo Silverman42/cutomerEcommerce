@@ -13,8 +13,8 @@
             class="text-sm py-1 px-2 rounded-md border border-gray-400 hover:border-yellow-400 flex items-center"
             @click.prevent="closeModal"
           >
-            <span class="flaticon-left-chevron"></span> &nbsp;
-            <span>Back</span>
+            <icon :icon="chevronLeft" />
+            <span class="inline-block ml-2">Back</span>
           </button>
         </header>
         <div class="body">
@@ -26,7 +26,13 @@
 </template>
 
 <script>
+import { Icon } from '@iconify/vue';
+import chevronLeft from '@iconify/icons-feather/chevron-left';
+
 export default {
+  components: {
+    Icon,
+  },
   props: {
     isopen: {
       type: Boolean,
@@ -40,6 +46,7 @@ export default {
   data() {
     return {
       body: document.querySelector('body'),
+      chevronLeft,
     };
   },
   watch: {

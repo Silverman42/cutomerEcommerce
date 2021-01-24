@@ -2,7 +2,7 @@
   <div class="pt-24 font-body">
     <modal :isopen="modalOpen" @update:isopen="modalOpen = $event">
       <section v-if="userProfileIsOpen === true">
-        <h2 class="text-2xl font-bold text-left">User Profile</h2>
+        <profile-card :profile-data="selectedPerson" />
       </section>
       <section v-if="filterIsOpen === true">
         <h2 class="text-2xl text-left font-bold mb-10">Filters</h2>
@@ -75,7 +75,7 @@
           width="w-full md:w-auto"
           font-color="text-white"
           @clik="clearFilter"
-          >Clear Paramters</primary-btn
+          >Clear Parameters</primary-btn
         >
       </div>
       <template v-if="loading === true">
@@ -113,6 +113,7 @@ import RadioInput from './components/RadioInput';
 import PrimaryBtn from './components/PrimaryBtn';
 import FilterParam from './components/FliterParameters';
 import Skeleton from './components/LoaderSkeleton';
+import ProfileCard from './components/ProfileCard';
 
 export default {
   components: {
@@ -124,6 +125,7 @@ export default {
     PrimaryBtn,
     FilterParam,
     Skeleton,
+    ProfileCard,
   },
   data() {
     return {
