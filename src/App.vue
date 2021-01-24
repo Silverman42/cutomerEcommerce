@@ -78,14 +78,20 @@
           >Clear Paramters</primary-btn
         >
       </div>
-      <user-list
-        v-for="(person, index) in pagination.data"
-        :key="index"
-        :person="person"
-        @openUserCard="openUserCard($event)"
-      />
-      <div class="mt-">
+      <template v-if="loading === true">
+        <skeleton v-for="count in 20" :key="count" />
+      </template>
+      <template v-if="loading === false">
+        <user-list
+          v-for="(person, index) in pagination.data"
+          :key="index"
+          :person="person"
+          @openUserCard="openUserCard($event)"
+        />
+      </template>
+      <div class="mt-5">
         <pagination
+          v-if="loading === false && pagination.data.length > 0"
           :next-disabled="nextDisabled"
           :previous-disabled="previousDisabled"
           :current-page="pagination.currentPage"
@@ -106,6 +112,7 @@ import Pagination from './components/Pagination';
 import RadioInput from './components/RadioInput';
 import PrimaryBtn from './components/PrimaryBtn';
 import FilterParam from './components/FliterParameters';
+import Skeleton from './components/LoaderSkeleton';
 
 export default {
   components: {
@@ -116,9 +123,11 @@ export default {
     RadioInput,
     PrimaryBtn,
     FilterParam,
+    Skeleton,
   },
   data() {
     return {
+      loading: true,
       paymentFilterList: [
         {
           title: 'Cheque',
@@ -190,6 +199,7 @@ export default {
     fetch('https://api.enye.tech/v1/challenge/records')
       .then((response) => response.json())
       .then((response) => {
+        vm.loading = false;
         vm.cachedData = response.records ? response.records.profiles : [];
         vm.paginateData(vm.filterData());
       });
