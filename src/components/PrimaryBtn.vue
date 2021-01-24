@@ -32,7 +32,7 @@ export default {
     },
     colorHover: {
       type: String,
-      default: 'bg-yellow-600',
+      default: 'hover:bg-yellow-600',
     },
     colorDisabled: {
       type: String,

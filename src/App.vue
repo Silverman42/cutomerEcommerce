@@ -71,6 +71,7 @@
         />
         <primary-btn
           color="bg-gray-400"
+          color-hover="hover:bg-gray-600"
           width="w-full md:w-auto"
           font-color="text-white"
           @clik="clearFilter"
