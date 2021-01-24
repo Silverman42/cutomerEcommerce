@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-24 font-body bg-gray-100">
+  <div class="pt-24 font-body">
     <modal :isopen="modalOpen" @update:isopen="modalOpen = $event">
       <section v-if="userProfileIsOpen === true">
         <h2 class="text-2xl font-bold text-left">User Profile</h2>

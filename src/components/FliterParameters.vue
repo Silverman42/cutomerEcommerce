@@ -22,8 +22,14 @@ export default {
     Icon,
   },
   props: {
-    body: String,
-    heading: String,
+    body: {
+      type: String,
+      default: '',
+    },
+    heading: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
