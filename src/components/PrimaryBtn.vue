@@ -51,19 +51,22 @@ export default {
       type: Boolean,
       default: false,
     },
-    extraClass: String,
+    extraClass: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
     buttonPrimaryStyling() {
-      if (disabled == true || loading == true) {
+      if (this.disabled === true || this.loading === true) {
         return {
-          hover: `bg-${color}-200`,
+          hover: `bg-${this.color}-200`,
           primary: ``,
         };
       }
       return {
-        hover: `bg-${color}-500`,
-        primary: `hover:bg-${color}-700`,
+        hover: `bg-${this.color}-500`,
+        primary: `hover:bg-${this.color}-700`,
       };
     },
   },
