@@ -29,7 +29,7 @@ export default {
   props: {
     color: {
       type: String,
-      default: 'primary',
+      default: 'yellow',
     },
     fontColor: {
       type: String,
