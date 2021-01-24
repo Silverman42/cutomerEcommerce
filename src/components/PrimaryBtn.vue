@@ -1,6 +1,6 @@
 <template>
   <button
-    class="inline-flex rounded-md h-12 px-5 items-center justify-center font-bold transition-all duration-300 ease-in-out"
+    class="inline-flex rounded-md h-12 px-5 items-center justify-center transition-all duration-300 ease-in-out"
     :class="[
       disabled == true || loading == true
         ? `bg-${color}-200`

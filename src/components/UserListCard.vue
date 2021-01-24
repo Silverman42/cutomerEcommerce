@@ -7,7 +7,13 @@
     <div class="flex w-11/12 justify-between">
       <div class="w-8/12 lg:w-3/12 flex">
         <div class="mr-3">
-          <figure class="w-10 h-10 rounded-full bg-yellow-200"></figure>
+          <figure class="w-10 h-10 rounded-full bg-yellow-200">
+            <img
+              class="object-cover object-center w-full"
+              :src="`./img/${getUserAvatar(person.Gender)}`"
+              alt="avatar"
+            />
+          </figure>
         </div>
         <div>
           <p class="text-sm font-semibold">
@@ -86,6 +92,11 @@ export default {
   methods: {
     viewProfile(person) {
       return this.$emit('openUserCard', person);
+    },
+    getUserAvatar(gender) {
+      if (gender === 'Male') return 'man.svg';
+      if (gender === 'Female') return 'woman.svg';
+      return 'unknown.svg';
     },
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <button
-    class="inline-block rounded-md h-12 px-5 flex items-center justify-center font-bold transition-all duration-300 ease-in-out"
+    class="inline-flex rounded-md h-12 px-5 items-center justify-center font-bold transition-all duration-300 ease-in-out"
     :class="[
       `hover:bg-${color}-200`,
       `bg-${color}-100`,

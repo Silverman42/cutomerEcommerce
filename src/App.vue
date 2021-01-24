@@ -16,7 +16,7 @@
               name="paymentFilter"
               :default-value="filters.paymentMethod"
               :title="paymentType.title"
-              @input="changePaymentFilter($event)"
+              @makeInput="changePaymentFilter($event)"
             />
           </div>
         </div>
@@ -30,7 +30,7 @@
               name="genderFilter"
               :default-value="filters.gender"
               :title="gender"
-              @input="changeGenderFilter($event)"
+              @makeInput="changeGenderFilter($event)"
             />
           </div>
         </div>
@@ -48,6 +48,36 @@
     </modal>
     <navbar @open-filter="openFilter()" @enterSearch="enterSearch($event)" />
     <section class="mx-5 md:mx-10 lg:mx-32 mb-10">
+      <div
+        v-if="canViewFilterParamters === true"
+        class="md:p-5 mb-8 p-3 border border-gray-300 rounded-md flex-wrap flex"
+      >
+        <filter-param
+          v-if="searchInput.length > 0"
+          heading="Search Parameter"
+          :body="searchInput"
+          @removeFilter="enterSearch('')"
+        />
+        <filter-param
+          v-if="filters.paymentMethod !== null"
+          heading="Payment Method Filter"
+          :body="filters.paymentMethod"
+          @removeFilter="changePaymentFilter(null)"
+        />
+        <filter-param
+          v-if="filters.gender !== null"
+          heading="Gender Filter"
+          :body="filters.gender"
+          @removeFilter="changeGenderFilter(null)"
+        />
+        <primary-btn
+          color="gray"
+          width="w-full md:w-auto"
+          font-color="text-white"
+          @clik="clearFilter"
+          >Clear Paramters</primary-btn
+        >
+      </div>
       <user-list
         v-for="(person, index) in pagination.data"
         :key="index"
@@ -75,6 +105,7 @@ import UserList from './components/UserListCard';
 import Pagination from './components/Pagination';
 import RadioInput from './components/RadioInput';
 import PrimaryBtn from './components/PrimaryBtn';
+import FilterParam from './components/FliterParameters';
 
 export default {
   components: {
@@ -84,6 +115,7 @@ export default {
     Pagination,
     RadioInput,
     PrimaryBtn,
+    FilterParam,
   },
   data() {
     return {
@@ -141,6 +173,16 @@ export default {
       }
       return false;
     },
+    canViewFilterParamters() {
+      if (
+        this.searchInput.length > 0 ||
+        this.filters.paymentMethod !== null ||
+        this.filters.gender !== null
+      ) {
+        return true;
+      }
+      return false;
+    },
   },
   mounted() {
     const vm = this;
@@ -164,8 +206,11 @@ export default {
       this.paginateData(this.filterData());
     },
     clearFilter() {
+      this.searchInput = '';
       this.filters.paymentMethod = null;
       this.filters.gender = null;
+      this.pagination.currentPage = 1;
+      this.paginateData(this.filterData());
     },
     enterSearch(searchValue) {
       this.searchInput = searchValue;

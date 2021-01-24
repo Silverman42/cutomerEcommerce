@@ -23,7 +23,10 @@ export default {
   name: 'RadioInput',
   props: {
     title: String,
-    defaultValue: String,
+    defaultValue: {
+      default: '',
+      validator: (prop) => typeof prop === 'string' || prop === null,
+    },
     value: String,
     name: String,
   },
@@ -40,7 +43,7 @@ export default {
   },
   methods: {
     getInputValue(event) {
-      return this.$emit('input', event.target.value);
+      return this.$emit('makeInput', event.target.value);
     },
   },
 };
