@@ -2,9 +2,8 @@
   <button
     class="inline-flex rounded-md h-12 px-5 items-center justify-center transition-all duration-300 ease-in-out"
     :class="[
-      disabled == true || loading == true
-        ? `bg-${color}-200`
-        : `bg-${color}-500 hover:bg-${color}-700`,
+      buttonPrimaryStyling.hover,
+      buttonPrimaryStyling.primary,
       width,
       extraClass,
       disabled == true ? 'cursor-not-allowed' : '',
@@ -53,6 +52,20 @@ export default {
       default: false,
     },
     extraClass: String,
+  },
+  computed: {
+    buttonPrimaryStyling() {
+      if (disabled == true || loading == true) {
+        return {
+          hover: `bg-${color}-200`,
+          primary: ``,
+        };
+      }
+      return {
+        hover: `bg-${color}-500`,
+        primary: `hover:bg-${color}-700`,
+      };
+    },
   },
   methods: {
     trigger(event) {
