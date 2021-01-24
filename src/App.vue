@@ -38,7 +38,6 @@
           <primary-btn
             v-if="filters.paymentMethod !== null || filters.gender !== null"
             width="w-full"
-            color="yellow"
             font-color="text-black"
             @clik="clearFilter"
             >Clear Filter</primary-btn
@@ -71,7 +70,7 @@
           @removeFilter="changeGenderFilter(null)"
         />
         <primary-btn
-          color="gray"
+          color="bg-gray-400"
           width="w-full md:w-auto"
           font-color="text-white"
           @clik="clearFilter"

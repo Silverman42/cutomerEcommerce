@@ -4,7 +4,6 @@
   >
     <primary-btn
       :disabled="previousDisabled"
-      color="yellow"
       font-color="text-black"
       @clik="enterPreviousPage"
     >
@@ -15,7 +14,6 @@
     </div>
     <primary-btn
       :disabled="nextDisabled"
-      color="yellow"
       font-color="text-black"
       @clik="enterNextPage"
     >

@@ -38,7 +38,6 @@
               type="submit"
               form="search"
               width="w-full"
-              color="yellow"
               font-color="text-black"
             >
               <icon :icon="icons.search" />

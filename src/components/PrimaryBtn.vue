@@ -28,7 +28,15 @@ export default {
   props: {
     color: {
       type: String,
-      default: 'yellow',
+      default: 'bg-yellow-400',
+    },
+    colorHover: {
+      type: String,
+      default: 'bg-yellow-600',
+    },
+    colorDisabled: {
+      type: String,
+      default: 'bg-yellow-200',
     },
     fontColor: {
       type: String,
