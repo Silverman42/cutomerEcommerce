@@ -67,13 +67,13 @@ export default {
     buttonPrimaryStyling() {
       if (this.disabled === true || this.loading === true) {
         return {
-          hover: `bg-${this.color}-200`,
-          primary: ``,
+          hover: '',
+          primary: this.colorDisabled,
         };
       }
       return {
-        hover: `bg-${this.color}-400`,
-        primary: `hover:bg-${this.color}-600`,
+        hover: this.colorHover,
+        primary: this.color,
       };
     },
     buttonStateCursor() {
