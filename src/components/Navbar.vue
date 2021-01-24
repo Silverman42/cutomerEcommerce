@@ -39,7 +39,7 @@
               form="search"
               width="w-full"
               color="yellow"
-              font-color="bg-black"
+              font-color="text-black"
             >
               <icon :icon="icons.search" />
             </primary-btn>

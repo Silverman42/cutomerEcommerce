@@ -39,7 +39,7 @@
             v-if="filters.paymentMethod !== null || filters.gender !== null"
             width="w-full"
             color="yellow"
-            font-color="black"
+            font-color="text-black"
             @clik="clearFilter"
             >Clear Filter</primary-btn
           >

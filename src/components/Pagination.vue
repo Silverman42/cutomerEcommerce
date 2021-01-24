@@ -11,7 +11,7 @@
       <icon :icon="icons.arrowLeft" />
     </primary-btn>
     <div class="px-3 text-center">
-      {{ currentPage }} / <sup>{{ lastPage }}</sup>
+      {{ currentPage }} / <sub>{{ lastPage }}</sub>
     </div>
     <primary-btn
       :disabled="nextDisabled"
