@@ -1,28 +1,47 @@
 <template>
-  <div v-if="isopen === true" class="container">
-    <transition-group tag="div">
-      <aside
-        key="backdrop"
-        class="modal-backdrop"
-        @click.prevent="closeModal"
-      ></aside>
-      <div key="modal" class="modal">
-        <header v-if="deactivateCloseBtn == false">
-          <button
-            href=""
-            class="text-sm py-1 px-2 rounded-md border border-gray-400 hover:border-yellow-400 flex items-center"
-            @click.prevent="closeModal"
-          >
-            <icon :icon="chevronLeft" />
-            <span class="inline-block ml-2">Back</span>
-          </button>
-        </header>
-        <div class="body">
-          <slot></slot>
+  <transition name="slide">
+    <div v-if="isopen === true" class="modal">
+      <header v-if="deactivateCloseBtn == false" key="header">
+        <button
+          href=""
+          class="text-sm py-1 px-2 rounded-md border border-gray-400 hover:border-yellow-400 flex items-center"
+          @click.prevent="closeModal"
+        >
+          <icon :icon="chevronLeft" />
+          <span class="inline-block ml-2">Back</span>
+        </button>
+      </header>
+      <div key="body" class="body">
+        <slot></slot>
+      </div>
+    </div>
+  </transition>
+
+  <!-- <transition name="slide"> -->
+  <!-- <div v-if="isopen === true" class="container">
+      <div>
+        <aside
+          key="backdrop"
+          class="modal-backdrop"
+          @click.prevent="closeModal"
+        ></aside>
+        <div class="modal">
+          <header v-if="deactivateCloseBtn == false" key="header">
+            <button
+              href=""
+              class="text-sm py-1 px-2 rounded-md border border-gray-400 hover:border-yellow-400 flex items-center"
+              @click.prevent="closeModal"
+            >
+              <icon :icon="chevronLeft" />
+              <span class="inline-block ml-2">Back</span>
+            </button>
+          </header>
+          <div key="body" class="body">
+            <slot></slot>
+          </div>
         </div>
       </div>
-    </transition-group>
-  </div>
+    </div> -->
 </template>
 
 <script>
@@ -107,6 +126,26 @@ export default {
 @screen lg {
   .modal {
     @apply w-3/12;
+  }
+}
+
+.slide-enter-active {
+  animation: slide 1s;
+  -webkit-animation: slide 1s;
+}
+
+.slide-leave-active {
+  animation: slide 0.2s reverse;
+  -webkit-animation: slide 0.3s reverse;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0%);
   }
 }
 </style>

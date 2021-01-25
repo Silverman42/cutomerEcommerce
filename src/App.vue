@@ -1,11 +1,18 @@
 <template>
   <div class="pt-24 font-body">
-    <modal :isopen="modalOpen" @update:isopen="modalOpen = $event">
+    <modal-backdrop
+      :isopen="modalBackdropOpen"
+      @update:isopen="toggleModal($event)"
+    />
+    <modal :isopen="modalOpen" @update:isopen="toggleModal($event)">
       <section v-if="userProfileIsOpen === true">
         <profile-card :profile-data="selectedPerson" />
       </section>
       <section v-if="filterIsOpen === true">
-        <h2 class="text-2xl text-left font-bold mb-10">Filters</h2>
+        <div class="mb-10">
+          <h2 class="text-2xl text-left font-bold">Filters</h2>
+          <p class="text-gray-500">Please select a filter</p>
+        </div>
         <div class="mb-5">
           Filter By Payment Method
           <div class="mt-2 flex flex-wrap">
@@ -100,6 +107,31 @@
           @enterPreviousPage="decrementPage"
         />
       </div>
+      <div
+        v-if="loading === false && pagination.data.length === 0"
+        class="mt-5"
+      >
+        <figure class="rounded-full block mx-auto w-24 h-24 md:w-40 md:h-40">
+          <img
+            :src="`./img/not_found.png`"
+            class="object-cover object-center"
+            alt="data not found"
+          />
+        </figure>
+        <div class="mt-5 text-center">
+          <h4 class="text-2xl">Oops!!</h4>
+          <p class="text-gray-600">No data was found. Please try again</p>
+        </div>
+        <div class="mt-5 text-center">
+          <primary-btn
+            color="bg-gray-400"
+            color-hover="hover:bg-gray-600"
+            font-color="text-white"
+            @clik="clearFilter"
+            >Try Again</primary-btn
+          >
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -114,6 +146,7 @@ import PrimaryBtn from './components/PrimaryBtn';
 import FilterParam from './components/FliterParameters';
 import Skeleton from './components/LoaderSkeleton';
 import ProfileCard from './components/ProfileCard';
+import ModalBackdrop from './components/ModalBackdrop';
 
 export default {
   components: {
@@ -125,6 +158,7 @@ export default {
     PrimaryBtn,
     FilterParam,
     Skeleton,
+    ModalBackdrop,
     ProfileCard,
   },
   data() {
@@ -151,6 +185,7 @@ export default {
       genderFilterList: ['Female', 'Male', 'Prefer To Skip'],
       searchInput: '',
       modalOpen: false,
+      modalBackdropOpen: false,
       selectedPerson: {},
       persons: [],
       userProfileIsOpen: false,
@@ -207,17 +242,24 @@ export default {
       });
   },
   methods: {
+    toggleModal(modalState) {
+      this.modalBackdropOpen = modalState;
+      this.modalOpen = modalState;
+    },
     changePaymentFilter(value) {
+      this.toggleModal(false);
       this.filters.paymentMethod = value;
       this.pagination.currentPage = 1;
       this.paginateData(this.filterData());
     },
     changeGenderFilter(value) {
+      this.toggleModal(false);
       this.filters.gender = value;
       this.pagination.currentPage = 1;
       this.paginateData(this.filterData());
     },
     clearFilter() {
+      this.toggleModal(false);
       this.searchInput = '';
       this.filters.paymentMethod = null;
       this.filters.gender = null;
@@ -232,13 +274,13 @@ export default {
     openFilter() {
       this.filterIsOpen = true;
       this.userProfileIsOpen = false;
-      this.modalOpen = true;
+      this.toggleModal(true);
     },
     openUserCard(person) {
       this.selectedPerson = person;
       this.filterIsOpen = false;
       this.userProfileIsOpen = true;
-      this.modalOpen = true;
+      this.toggleModal(true);
     },
     incrementPage() {
       window.scrollTo(0, 0);
